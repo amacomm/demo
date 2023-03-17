@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" styleClass="root" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.PrimaryController">
+   <children>
+    <AnchorPane layoutX="416.0" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="185.0">
+         <children>
+            <VBox prefHeight="398.0" prefWidth="200.0">
+               <children>
+               <TableView fx:id="tablePoint" layoutX="12.0" layoutY="62.0" prefHeight="324.0" prefWidth="250">
+                  <columns>
+                  <!-- Колонки таблицы -->
+                  <TableColumn prefWidth="75.0" text="X" fx:id="xColumn" />
+                  <TableColumn prefWidth="75.0" text="Y" fx:id="yColumn" />
+                  <TableColumn prefWidth="30.0" text="Delete" fx:id="bColumn" />
+                  </columns>
+               </TableView>
+                  <Button mnemonicParsing="false" onAction="#Func" prefHeight="66.0" prefWidth="150.0" text="y=sinc(x)" fx:id="xyButton" />
+                  <Button mnemonicParsing="false" onAction="#AddPoint" prefHeight="66.0" prefWidth="150.0" text="Добавить" fx:id="xyButton2" />
+                  <TextField fx:id="textField" prefHeight="66.0" prefWidth="150.0"/>
+                  <Button fx:id="clearButton" mnemonicParsing="false" onAction="#Clear" prefHeight="66.0" prefWidth="150.0" text="clear" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="-7.0" prefHeight="400.0" prefWidth="420.0">
+         <children>
+            <LineChart fx:id="lineGraph" legendVisible="false" prefHeight="372.0" prefWidth="423.0" visible="false">
+              <xAxis>
+              <NumberAxis autoRanging="false" lowerBound="-20" side="BOTTOM" tickUnit="1" upperBound="20" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis autoRanging="false" lowerBound="-1" side="LEFT" tickUnit="1" upperBound="1" />
+              </yAxis>
+              <cursor>
+                 <Cursor fx:constant="CROSSHAIR" />
+              </cursor>
+            </LineChart>
+            <AreaChart fx:id="areaGraph" legendVisible="false" prefHeight="372.0" prefWidth="423.0">
+              <xAxis>
+              <NumberAxis autoRanging="false" lowerBound="-20" side="BOTTOM" tickUnit="1" upperBound="20" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis autoRanging="false" lowerBound="-1" side="LEFT" tickUnit="1" upperBound="1" />
+              </yAxis>
+              <cursor>
+                 <Cursor fx:constant="CROSSHAIR" />
+              </cursor>
+            </AreaChart>
+            <Button fx:id="lineGraphButton" onAction="#handleLineGraphButtonAction" layoutX="35.0" layoutY="366.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="185.0" text="Line Graph" />
+            <Button layoutX="224.0" onAction="#handleAreaGraphButtonAction" layoutY="366.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="185.0" text="Area Graph" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
