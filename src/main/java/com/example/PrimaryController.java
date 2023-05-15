@@ -17,9 +17,6 @@ public class PrimaryController  implements Initializable{
     private ObservableList<Point> pointData = FXCollections.observableArrayList();
 
     @FXML
-    private LineChart<Double, Double> lineGraph;
-
-    @FXML
     private AreaChart<Double, Double> areaGraph;
 
     @FXML
@@ -33,12 +30,6 @@ public class PrimaryController  implements Initializable{
 
     @FXML
     private TableColumn<Point, Button> bColumn;
-
-    @FXML
-    private Button lineGraphButton;
-
-    @FXML
-    private Button areaGraphButton;
 
     @FXML
     private Button xyButton;
@@ -63,14 +54,11 @@ public class PrimaryController  implements Initializable{
 
     @FXML
     private TextField textField;
-
-    private MyGraph mathsGraph;
-    private MyGraph areaMathsGraph;
+    private MyGraph MathGraph;
 
     @Override
     public void initialize(final URL url, final ResourceBundle rb) {
-        mathsGraph = new MyGraph(lineGraph);
-        areaMathsGraph = new MyGraph(areaGraph);
+        MathGraph = new MyGraph(areaGraph);
 
         xColumn.setCellValueFactory(new PropertyValueFactory<>("x"));
         yColumn.setCellValueFactory(new PropertyValueFactory<>("y"));
@@ -78,8 +66,8 @@ public class PrimaryController  implements Initializable{
 
         xColumn.setCellFactory(TextFieldTableCell.<Point, Double>forTableColumn(new DoubleStringConverter()));
         xColumn.setOnEditCommit(e -> {
+            MathGraph.chengePoint(e.getOldValue(), e.getNewValue());
             e.getTableView().getItems().get(e.getTablePosition().getRow()).setX(e.getNewValue());
-            areaMathsGraph.chengePoint(e.getOldValue(), e.getNewValue());
         });
 
 
@@ -89,56 +77,31 @@ public class PrimaryController  implements Initializable{
     }
 
     @FXML
-    private void handleLineGraphButtonAction(final ActionEvent event) {
-        lineGraph.setVisible(true);
-        areaGraph.setVisible(false);
-    }
-
-    @FXML
-    private void handleAreaGraphButtonAction(final ActionEvent event) {
-        areaGraph.setVisible(true);
-        lineGraph.setVisible(false);
-    }
-
-    @FXML
     private void Func(final ActionEvent event) {
         plotLine();
     }
 
+    private void AddValue(double x){
+        MathGraph.addPoint(x);
+        Button b = new Button("x");
+        Point p = new Point(x, b);
+        b.setOnAction(e -> {
+            pointData.remove(p);
+            MathGraph.remove(p);
+        });
+        pointData.add(p);
+    }
+
     private void plotLine() {
         for(double i =-20; i<20; i++){
-            areaMathsGraph.addPoint(i);
-            Button b = new Button("x");
-            Point p = new Point(i, b);
-            b.setOnAction(e -> {
-                pointData.remove(p);
-                areaMathsGraph.removePoint(p.getX());
-            });
-            pointData.add(p);
+            AddValue(i);
         }
-        // if (lineGraph.isVisible()) {
-        //     mathsGraph.plotLine();
-        // } else {
-        //     areaMathsGraph.plotLine();
-        // }
     }
 
     @FXML
     private void AddPoint(final ActionEvent event) {
         double d = Double.parseDouble(textField.getText());
-        areaMathsGraph.addPoint(d);
-        Button b = new Button("x");
-            Point p = new Point(d, b);
-            b.setOnAction(e -> {
-                pointData.remove(p);
-                areaMathsGraph.removePoint(d);
-            });
-            pointData.add(p);
-    }
-
-    @FXML
-    private void handleSquaredButtonAction(final ActionEvent event) {
-        areaMathsGraph.chengePoint(5, 3.34);
+        AddValue(d);
     }
 
     @FXML
@@ -148,10 +111,6 @@ public class PrimaryController  implements Initializable{
 
     private void clear() {
         pointData.clear();
-        if (lineGraph.isVisible()) {
-            mathsGraph.clear();
-        } else {
-            areaMathsGraph.clear();
-        }
+        MathGraph.clear();
     }
 }

@@ -31,17 +31,6 @@
       </AnchorPane>
       <AnchorPane layoutX="-7.0" prefHeight="400.0" prefWidth="420.0">
          <children>
-            <LineChart fx:id="lineGraph" legendVisible="false" prefHeight="372.0" prefWidth="423.0" visible="false">
-              <xAxis>
-              <NumberAxis autoRanging="false" lowerBound="-20" side="BOTTOM" tickUnit="1" upperBound="20" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis autoRanging="false" lowerBound="-1" side="LEFT" tickUnit="1" upperBound="1" />
-              </yAxis>
-              <cursor>
-                 <Cursor fx:constant="CROSSHAIR" />
-              </cursor>
-            </LineChart>
             <AreaChart fx:id="areaGraph" legendVisible="false" prefHeight="372.0" prefWidth="423.0">
               <xAxis>
               <NumberAxis autoRanging="false" lowerBound="-20" side="BOTTOM" tickUnit="1" upperBound="20" />
@@ -53,9 +42,7 @@
                  <Cursor fx:constant="CROSSHAIR" />
               </cursor>
             </AreaChart>
-            <Button fx:id="lineGraphButton" onAction="#handleLineGraphButtonAction" layoutX="35.0" layoutY="366.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="185.0" text="Line Graph" />
-            <Button layoutX="224.0" onAction="#handleAreaGraphButtonAction" layoutY="366.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="185.0" text="Area Graph" />
-         </children>
+            </children>
       </AnchorPane>
    </children>
 </AnchorPane>

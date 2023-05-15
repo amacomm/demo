@@ -1,50 +1,50 @@
 package com.example;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Data;
 
 public class MyGraph {
-
-    private XYChart<Double, Double> graph;
-    private XYChart.Series<Double, Double> series;
+    private ObservableList<Data<Double, Double>> pointData = FXCollections.observableArrayList();
 
     public MyGraph(final XYChart<Double, Double> graph) {
-        this.graph = graph;
-        series = new XYChart.Series<Double, Double>();
+        XYChart.Series<Double, Double> series = new XYChart.Series<Double, Double>();
         graph.getData().add(series);
+        series.setData(pointData);
     }
 
-    private void plotPoint(final double x, final XYChart.Series<Double, Double> series) {
-        series.getData().add(new XYChart.Data<Double, Double>(x, x==0?1:Math.sin(x)/x));
+    private XYChart.Data<Double, Double> Func(double x){
+        return new XYChart.Data<Double, Double>(x, x==0?1:Math.sin(x)/x);
     }
 
     public void addPoint(double x){
-        plotPoint(x, series);
+        pointData.add(Func(x));
     }
 
     public void chengePoint(double j, double x){
-        for(int i = 0 ; i< series.getData().size(); i++){
-            if(series.getData().get(i).getXValue() == i){
-            series.getData().get(i).setXValue(x);
-            series.getData().get(i).setYValue(x==0?1:Math.sin(x)/x);
-        return;
-        }
-        }
-    }
-
-    public void removePoint(double i){
-        for (XYChart.Data<Double, Double> t : series.getData()) {
-            if(t.getXValue() == i){
-                removePoint(t);
+        for(int i = 0 ; i< pointData.size(); i++){
+            if(((Double)pointData.get(i).getXValue()).equals(j)){
+                pointData.set(i, Func(x));
                 return;
             }
         }
     }
 
-    public void removePoint(XYChart.Data<Double, Double> i){
-        series.getData().remove(i);
+    public void removePoint(double x){
+        for (XYChart.Data<Double, Double> t : pointData) {
+            if(t.getXValue().equals(x)){
+                pointData.remove(t);
+                return;
+            }
+        }
+    }
+
+    public void remove(Point p){
+        removePoint(p.getX());
     }
 
     public void clear() {
-        series.getData().clear();
+        pointData.clear();
     }
 }

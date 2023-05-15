@@ -53,8 +53,6 @@
                  <Cursor fx:constant="CROSSHAIR" />
               </cursor>
             </AreaChart>
-            <Button fx:id="lineGraphButton" onAction="#handleLineGraphButtonAction" layoutX="35.0" layoutY="366.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="185.0" text="Line Graph" />
-            <Button layoutX="224.0" onAction="#handleAreaGraphButtonAction" layoutY="366.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="185.0" text="Area Graph" />
          </children>
       </AnchorPane>
    </children>
